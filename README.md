@@ -21,7 +21,8 @@ students = [
   }
 ]
 
-upper_case_full_names = []
+
+upper_case_full_names = [ {students[0][:first_name] students[0][:last_name]} , {students[1][:first_name].upcase,students[1][:last_name].upcase},  {students[2][:first_name].upcase,students[2][:last_name].upcase }]
 
 ```
 
@@ -76,8 +77,8 @@ users = [
   }
 ]
 
-first_order_for_each_user = []
 
+ first_order_for_each_user = [users[0][:orders],users[1][:orders][0], users[2][:orders][0]]
 ```
 
 ### Answer
@@ -146,7 +147,7 @@ people = [
 ]
 
 
-coffee_average_per_person = []
+coffee_average_per_person = [pepole[0][:transactions].sum/[:transactions].length]
 
 ```
 
@@ -154,10 +155,10 @@ coffee_average_per_person = []
 
 ```rb
 
-[ 
-  {name: "Jawaher", :coffee_average=>5.93}, 
-  {name: "Nader", :coffee_average=>4.43}, 
-  {name: "Samah", :coffee_average=>37.28666666666667} 
+[
+  {name: "Jawaher", :coffee_average=>5.93},
+  {name: "Nader", :coffee_average=>4.43},
+  {name: "Samah", :coffee_average=>37.28666666666667}
 ]
 
 ```
@@ -212,11 +213,22 @@ most_expensive_products_by_store = []
 
 ```
 
-### Answer
+results = []
+stores.each do |store|
+  tmp_store = {:store_name => store[:store_name], :most_expensive_product => {:price => 0}}
+  store[:products].each do |product|
+    if product[:price] > tmp_store[:most_expensive_product][:price]
+      tmp_store[:most_expensive_product] = product
+    end
+  end
+  results << tmp_store
+end
+
+puts results
 
 ```rb
 
-[ 
+[
   {store_name: "Jarir", most_expensive_product: { description: "Titanium", price: 9384.33}},
   {store_name: "Danub", most_expensive_product: { description: "Silver", price: 654.44}},
   {store_name: "Souq", most_expensive_product: { description: "Sapphire", price: 899.33}}
